@@ -12,6 +12,10 @@ guides to help you get up and running is found here as well.
 * [Start by creating an Slack app](01.create_app.md)
 * [Read through "before you code"](02.before_you_code.md) (if you want to)
 * [And just build your first bot!](03.building_our_first_bot.md)
+* [Make the bot talk](04.making_the_bot_talk.md)
+* [Extend the bot usage](05.extend_bot_usage.md)
+* [Create advanced chat messages](06.create_chat_message_blocks.md)
+* [Interact with the message](07.interact_with_messages.md)
 
 ## Contact
 
