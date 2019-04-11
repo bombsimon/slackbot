@@ -16,6 +16,7 @@ guides to help you get up and running is found here as well.
 * [Extend the bot usage](05.extend_bot_usage.md)
 * [Create advanced chat messages](06.create_chat_message_blocks.md)
 * [Interact with the message](07.interact_with_messages.md)
+* [Keep track of voting](08.keep_track_of_users.md)
 
 ## Contact
 
