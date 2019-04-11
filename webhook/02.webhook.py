@@ -8,6 +8,7 @@ import os
 import json
 
 from flask import Flask, request
+from pprint import pprint
 from slackclient import SlackClient
 
 app = Flask(__name__)
@@ -46,12 +47,7 @@ def slackbot():
         return "Forbidden", 403
 
     user_data = client.api_call("users.info", user=user_id)
-
-    user_info = {
-        "type": "image",
-        "image_url": user_data["user"]["profile"]["image_48"],
-        "alt_text": user_data["user"]["profile"]["display_name"],
-    }
+    user_info = construct_user_info(user_data)
 
     for i, block in enumerate(blocks):
         if block.get("block_id") != button_clicked:
@@ -80,11 +76,49 @@ def slackbot():
 
     votes[message_ts][user_id] = True
 
-    client.api_call(
+    result = client.api_call(
         "chat.update", channel=channel_id, ts=message_ts, blocks=blocks
     )
 
+    if not result["ok"]:
+        pprint(result)
+
+        return "Internal error", 500
+
     return "OK", 200
+
+
+def construct_user_info(user_data):
+    """
+    Based on all the user data returned from the API for a user, create a
+    context block and add appropreate alt tag.
+    """
+    user_info = {
+        "type": "image",
+        "image_url": user_data["user"]["profile"]["image_48"],
+    }
+
+    profile_fields = ["real_name", "display_name", "first_name"]
+    user_fields = ["real_name", "name"]
+
+    # Search relevant profile fields
+    for field in profile_fields:
+        if user_data["user"]["profile"][field]:
+            user_info["alt_text"] = user_data["user"]["profile"][field]
+
+            return user_info
+
+    # Serach relevant user fields
+    for field in user_fields:
+        if user_data["user"][field]:
+            user_info["alt_text"] = user_data["user"][field]
+
+            return user_info
+
+    # We couldn't figure it out...
+    user_info["alt_text"] = "Unknown"
+
+    return user_info
 
 
 def clean_blocks(blocks):
