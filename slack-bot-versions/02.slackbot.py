@@ -37,7 +37,7 @@ def main():
 def tagged_messages(client: SlackClient, user_id: str):
     """
     Check the connection and parse all events. If the event is of desired type
-    or content yield the message to the consumer of the iterator.
+    or content yield the message to the consumer of the generator.
     """
     while True:
         for data in client.rtm_read():

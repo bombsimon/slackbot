@@ -62,8 +62,12 @@ def slackbot():
         next_block["elements"].insert(0, user_info)
 
         # Update the number of votes.
-        next_block["elements"][-1]["text"] = "{} votes".format(
-            len(next_block["elements"]) - 1
+        vote_word = "vote"
+        if len(next_block["elements"]) - 1 > 1:
+            vote_word += "s"
+
+        next_block["elements"][-1]["text"] = "{} {}".format(
+            len(next_block["elements"]) - 1, vote_word
         )
 
         break

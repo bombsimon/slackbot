@@ -67,7 +67,7 @@ def whats_for_lunch(client: SlackClient, data: dict):
     client.rtm_send_message(data.get("channel"), random.choice(restaurants))
 
 
-def create_message(client: SlackClient, data: dict):
+def create_message(client, data):
     """
     Create a blocked message with available restaurants to vote for.
     """

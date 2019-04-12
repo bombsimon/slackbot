@@ -53,7 +53,11 @@ def slackbot():
         "chat.update",
         channel=channel_id,
         ts=message_ts,
-        blocks=payload.get("message").get("blocks"),
+        blocks=payload["message"]["blocks"],
     )
 
     return "OK", 200
+
+
+if __name__ == "__main__":
+    app.run()
