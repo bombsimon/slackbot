@@ -21,7 +21,7 @@ few guides to help you get up and running is found here as well.
 ## Contact
 
 Please feel free to contact
-[simon.sawert@internetstiftelsen.se](mailto:simon.sawert@internetstiftelsen.se)
+[simon@sawert.se](mailto:simon@sawert.se)
 if you have any questions or feedback!
 
 ## Licence
